@@ -2,7 +2,7 @@
 
 #
 # Pre-receive hook that will block any new commits that contain files ending
-# with .gz, .zip or .tgz
+# with .gz, .exe, .dll, .zip or .tgz
 #
 # More details on pre-receive hooks and how to apply them can be found on
 # https://help.github.com/enterprise/admin/guides/developer-workflow/managing-pre-receive-hooks-on-the-github-enterprise-appliance/
@@ -38,7 +38,7 @@ while read oldrev newrev refname; do
     for FILE  in `git log -1 --name-only --pretty=format:'' $COMMIT`;
     do
       case $FILE in
-      *.zip|*.gz|*.tgz )
+      *.zip|*.dll|*.exe|*.gz|*.tgz )
         echo "Hello there! We have restricted committing that filetype. Please see Dave in IT to discuss alternatives."
         exit 1
         ;;
